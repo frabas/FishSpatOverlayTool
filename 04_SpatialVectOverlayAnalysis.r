@@ -1,120 +1,4 @@
 
-
-##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
-# Make closure boxes polygons!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
-##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
-##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
-
-
-library(sf)
-library(leaflet)
-library(raster)
-library(dplyr)
-library(rnaturalearth)
-library(ggplot2)
-
-#background map
- sf_world <- ne_countries(returnclass='sf')
-# plot(sf_world, add=TRUE, col="grey", border=FALSE)
-  
-
-cut_polygon = function(polygon, mindepth, maxdepth){
-  bbox=st_bbox(polygon)
-  b <- as(extent(bbox[1], bbox[3], bbox[2], bbox[4]), 'SpatialPolygons')
-  crs(b) <- crs(bathy)
-  localbathy=crop(bathy_sub,b)
-  localbathy[localbathy > -mindepth] = NA
-  localbathy[localbathy < -maxdepth] = NA
-  localbathy[!is.na(localbathy)] = 1
-  localbathy_sf=st_as_sf(rasterToPolygons(localbathy))
-  st_intersection(st_make_valid(polygon),st_union(localbathy_sf))
-}
-
-convert_coordinates <- function(x){
-  require(stringr)
-  len=nchar(x)
-  degree=as.numeric(sapply(strsplit(x,split="°"), function(coord) coord[1]))
-  minutes=as.numeric(str_match(x,"'")[,2])
-  seconds=as.numeric(gsub(",",".",substr(x, str_locate(x, "''")[,1]+1,len-2)))
-  seconds=ifelse(seconds>60,seconds/100,seconds)
-  minutes2 = NA
-  if (any(is.na(minutes)))
-    minutes2=as.numeric(gsub(",",".",substr(x,str_locate(x, "'")[,1]+1,len-2)))
-  res=degree+ifelse(!is.na(minutes),
-                    minutes/60+seconds/3600,
-                    minutes2/60)
-  res=ifelse(endsWith(x,"W"), -res, res)
-  res
-}
-
-
-create_a_polygon <- function(x){
-  #coords<-cbind(convert_coordinates(x$Longitude),
-  #             convert_coordinates(x$Latitude))
-  coords<-cbind(x$Longitude,
-               x$Latitude)
-  if (!all(coords[1,]==coords[nrow(coords),]))
-    coords            <- rbind(coords,coords[1,] )
-  a_polygon           <- st_sf(st_sfc(st_polygon(list(coords)), crs=4326))
-    a_polygon$year <- x$year[1]
-  if ("name" %in% names(x))
-    a_polygon$name <- x$name[1]
-  if ("depth" %in% names(x))
-    a_polygon <- cut_polygon(polygon, x$depth[1], x$depth[2])
-  a_polygon
-}
-
-
-#bathy=raster("GEBCO_04_Jul_2022/gebco.tif")
-
-#b <- as(extent(-5.6, 10, 30.2, 44), 'SpatialPolygons')
-#crs(b) <- crs(bathy)
-#bathy_sub=crop(bathy,b)
-
-
-
- # create polygons
- poly_coords     <- read.table (file=file.path("D:","FBA","ADVICES","STECF","STECF_ad_hoc_2023_VMEs","Contract n2","COORD sc2opt1_ImplementingAct DSAR.csv"), header=TRUE, sep=";")
- poly_coords$year <- 2022
- poly_coords$name <- "DG_MARE"
- lst_poly_coords <- split(poly_coords, f=poly_coords$Poly_No)
- lst_poly_coords <- lapply(lst_poly_coords, as.list)
- allclosures_sf_list <- lapply(lst_poly_coords, create_a_polygon)
-
-
- # export a shp file
- allclosures_sf <- do.call(dplyr::bind_rows, allclosures_sf_list)  # bind many df into one....
- allclosures_sf$popup <- seq_len(nrow(allclosures_sf))
- allclosures_sf <- allclosures_sf %>%
-  dplyr::mutate(year= dplyr::case_when(year=="2022" ~ 2022))
- st_write(allclosures_sf, file.path("D:","FBA","ADVICES","STECF","STECF_ad_hoc_2023_VMEs","Contract n2","fba_closure_VMEs_2022.shp"), append=FALSE)
-
-
- # a visual check 
- library(leaflet)
- leaflet(allclosures_sf %>% dplyr::filter(year==2022)) %>% addTiles() %>% addPolygons(popup=~htmltools::htmlEscape(paste(popup, name)))
-
-
-
- # export a plot
- library(ggplot2)
- pols <- allclosures_sf %>% dplyr::filter(allclosures_sf$year=="2022")
-  coords <- st_bbox(pols)
-  print(ggplot(pols) +
-          geom_sf(fill=NA, color=grey(0.5)) +
-          xlim(coords[1]-.3, coords[3]+.3)+
-          ylim(coords[2]-.3, coords[4]+.3) +
-          #geom_sf(data=continent, color="black", fill="grey", inherit.aes=FALSE)+
-          ggtitle("closed")+
-          scale_fill_manual("year",values=grey(0.5))+
-          theme_bw()+
-          xlab("")+
-          ylab(''))
-  
-  ggsave(paste0("closed.png"),width=16/2.54, dpi=300)
-
-
-
 ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
 # A quick spatial overlay!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
 ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
@@ -295,39 +179,142 @@ return(e_mpas)
  #allclosures_sf <- st_read(file.path(getwd(), "INPUT_SPATIAL_LAYERS", "OWF", "EMODnet_HA_WindFarms_20221219", "EMODnet_HA_WindFarms_pg_20221219.shp"))
  # etc.
  
- # The recent shp sent by EC:
- library(sf)
- VMEs_MARE <- st_read(file.path(getwd(),"INPUT_SPATIAL_LAYERS","VMEs","DGMARE_Sc2Opt1", "Scenario2_option1_DG_Mare_Poly.shp"))
- ICES_VMEs_SceC <- st_read(file.path(getwd(),"INPUT_SPATIAL_LAYERS","VMEs","ICES_VMEs_Coordinates_shp", "Scenario_C.shp"))
- ICES_VMEs_SceD <- st_read(file.path(getwd(),"INPUT_SPATIAL_LAYERS","VMEs","ICES_VMEs_Coordinates_shp", "Scenario_D.shp"))
- plot(st_geometry(VMEs_MARE))
- plot(st_geometry(ICES_VMEs_SceC), col=rgb(0.5,0.5,0.5,0.5), add=TRUE)
- plot(st_geometry(ICES_VMEs_SceD), col=rgb(0.8,0.2,0.5,0.8), add=TRUE)
+ 
+ ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
+##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
+##!!!!!!!!!!!!!!!!!CDDA + NATURA 2000 + OTHER FROM PARTNERS!!!!!#
+##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
+##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
+
+  library(sf)
+  mpas    <- st_read(file.path(getwd(), "INPUT_SPATIAL_LAYERS","CLOSURES_PARTNERS","wetransfer_eu_uk_final_2023-08-10_1644","EU_UK_final","EU__plus_UK_future_restrictions.shp"))
+  # =>  produced based on the CINEA MPA database 
+  a_df              <- st_drop_geometry(mpas) # get the df
+
+   plot(mpas["Origin"])
+
+  library(terra)
+  mpas_vect_terra         <- vect(mpas)
+  #=> NOT in EEA Lambert proj because we do NOT do the overlay in Lambert proj (because would induce a resampling)
+
+
+  idx                                 <- which(a_df["rmv_lns_S0"]==1)
+  #plot(mpas_vect_terra)
+  #plot(mpas_vect_terra[idx], add=TRUE, col=2)
+  #=> TODO: Check with ArcGIS is everything in order
+  mpas_rmv_lns <- mpas_vect_terra[idx]
+
+  idx                                 <- which(a_df["rmv_lns_S0"]==1 & a_df$reason_lns %in% c("current", "current_habitat","current_spp", "current_habitat_spp"))
+  #plot(mpas_vect_terra)
+  #plot(mpas_vect_terra[idx], add=TRUE, col=2)
+  #=> TODO: Check with ArcGIS is everything in order
+  mpas_rmv_lns_current <- mpas_vect_terra[idx]
+
+  idx                                 <- which(a_df["rmv_nts_S0"]==1)
+  #plot(mpas_vect_terra)
+  #plot(mpas_vect_terra[idx], add=TRUE, col=2)
+  #=> TODO: Check with ArcGIS is everything in order
+  mpas_rmv_nts <- mpas_vect_terra[idx]
+
+  idx                                 <- which(a_df["rmv_nts_S0"]==1 & a_df$reason_nts %in% c("current", "current_habitat","current_spp", "current_habitat_spp"))
+  #plot(mpas_vect_terra)
+  #plot(mpas_vect_terra[idx], add=TRUE, col=2)
+  #=> TODO: Check with ArcGIS is everything in order
+  mpas_rmv_nts_current <- mpas_vect_terra[idx]
+
+  idx                                 <- which(a_df["rmv_bt__S0"]==1)
+  #plot(mpas_vect_terra)
+  #plot(mpas_vect_terra[idx], add=TRUE, col=2)
+  #=> TODO: Check with ArcGIS is everything in order
+  mpas_rmv_bt <- mpas_vect_terra[idx]
+  
+  idx                                 <- which(a_df["rmv_bt__S0"]==1 & a_df$reason_bt %in% c("current", "current_habitat","current_spp", "current_habitat_spp"))
+  #plot(mpas_vect_terra)
+  #plot(mpas_vect_terra[idx], add=TRUE, col=2)
+  #=> TODO: Check with ArcGIS is everything in order
+  mpas_rmv_bt_current <- mpas_vect_terra[idx]
+  
+#  * *current* = current restrictions in place
+#* *current_habitat* = current restrictions in place plus hypothetical habitat restriction
+#* *current_spp* = current restrictions in place plus hypothetical directive species restriction
+#* *Notrescurrent* = No current restrictions in place or in hypothetical scenario
+#* *Notrescurrent_habitat* = No current restrictions in place but hypothetical habitat restriction
+#* *Notrescurrent_habitat_spp* = No current restrictions in place but hypothetical habitat and directive species restriction
+#* *Notrescurrent_habitat* = No current restrictions in place but hypothetical directive species restriction
+
+
+ 
+##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
+##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
+##!!!!!!!!!!!!!!!!!OWF!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
+##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
+##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
+
+  library(sf)
+  owf_msfd                 <- st_read(file.path(getwd(), "INPUT_SPATIAL_LAYERS", "OWF","EMODnet_HA_WindFarms_20221219", "EMODnet_HA_WindFarms_pg_20221219.shp"))
+  a_df                     <- st_drop_geometry(owf_msfd) # get the df
+
+  owf_msfd_missing                 <- st_read(file.path(getwd(), "INPUT_SPATIAL_LAYERS", "OWF","missing_polygons.shp"))
+  a_df_missing                     <- st_drop_geometry(owf_msfd_missing) # get the df
+
+  
+  # sf vect to terra::vect to do some extract with it
+  library(terra)
+  owf_msfd_vect_terra         <- vect(owf_msfd)
+
+  #owf_msfd_vect_terra       <- project(owf_msfd_vect_terra, "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs")
+  #=> cause we do the overlay in Lambert proj
+  owf_miss_msfd_vect_terra         <- vect(owf_msfd_missing) # NO PROJ!
+  
+  owf_terra <- rbind(owf_msfd_vect_terra, owf_miss_msfd_vect_terra)
+  
+  # check
+  graphics.off()
+  plot(owf_miss_msfd_vect_terra)
+  plot(owf_msfd_vect_terra, add=TRUE, col="red")
+  
+  plot(owf_terra, add=FALSE, col="red")
+
+  #plot(mpas_vect_terra, add=TRUE, col="green")
+                
+ 
+
+ #
+# # The recent shp sent by EC:
+# library(sf)
+# VMEs_MARE <- st_read(file.path(getwd(),"INPUT_SPATIAL_LAYERS","VMEs","DGMARE_Sc2Opt1", "Scenario2_option1_DG_Mare_Poly.shp"))
+# ICES_VMEs_SceC <- st_read(file.path(getwd(),"INPUT_SPATIAL_LAYERS","VMEs","ICES_VMEs_Coordinates_shp", "Scenario_C.shp"))
+# ICES_VMEs_SceD <- st_read(file.path(getwd(),"INPUT_SPATIAL_LAYERS","VMEs","ICES_VMEs_Coordinates_shp", "Scenario_D.shp"))
+# plot(st_geometry(VMEs_MARE))
+# plot(st_geometry(ICES_VMEs_SceC), col=rgb(0.5,0.5,0.5,0.5), add=TRUE)
+# plot(st_geometry(ICES_VMEs_SceD), col=rgb(0.8,0.2,0.5,0.8), add=TRUE)
+ 
  
  # a stacked visual
+ if(FALSE){
  library(leaflet)
  map <- leaflet() %>%
   addTiles() 
- map <- map %>% addPolygons(data=VMEs_MARE, popup=~htmltools::htmlEscape(paste(Poly_No, ISO_TER1)), col="blue", group = "VMEs_MARE")  %>%
-      addPolygons(data=ICES_VMEs_SceC, popup=~htmltools::htmlEscape(paste(poly_id)), col="green", group = "ICES_VMEs_SceC")  %>%
-      addPolygons(data=ICES_VMEs_SceD, popup=~htmltools::htmlEscape(paste(poly_id)), col="red", group = "ICES_VMEs_SceD")  
+ map <- map %>% addPolygons(data=owf_msfd, popup=~htmltools::htmlEscape(paste(NAME)), col="blue", group = "OWF")  %>%
+      addPolygons(data=owf_msfd_missing, popup=~htmltools::htmlEscape(paste(Name)), col="green", group = "OWFmiss")  %>%
+      addPolygons(data=sf::st_as_sf(mpas_rmv_bt), popup=~htmltools::htmlEscape(paste(SiteName)), col="red", group = "MPA_btrawels") %>%
+      addPolygons(data=sf::st_as_sf(mpas_rmv_nts), popup=~htmltools::htmlEscape(paste(SiteName)), col="red", group = "MPA_netters") %>%
+      addPolygons(data=sf::st_as_sf(mpas_rmv_lns), popup=~htmltools::htmlEscape(paste(SiteName)), col="red", group = "MPA_longliners")  
  map <- map %>% addLayersControl(
      baseGroups = "",
-     overlayGroups = c("VMEs_MARE","ICES_VMEs_SceC", "ICES_VMEs_SceD"),
+     overlayGroups = c("OWF","OWFmiss", "MPA_btrawlers", "MPA_netters", "MPA_longliners"),
     options = layersControlOptions(collapsed = FALSE))
  map
  library(htmlwidgets)
- saveWidget(map, file=file.path(getwd(),"INPUT_SPATIAL_LAYERS","VMEs","leaflet_map_VMEs.html"))
-
+ saveWidget(map, file=file.path(getwd(),"OVERLAY","leaflet_map_restrictions.html"))
+ }
 
  #!!!!!!!!!!!!!!!!!!!!#
  #!!!!!!!!!!!!!!!!!!!!#
- sces       <- c("Closure2022", "ICES_SceC", "ICES_SceD")
+ sces <- c("OWF", "currentMPAs", "MPAs", "OWF+currentMPAs", "OWF+MPAs") 
  years      <- 2018:2021
- a_folder   <- "OUTCOME_OVERLAY_VMEs"
- a_folder2  <- "OUTCOME_FISHERIES_DISTR_FDI_AER"
- #a_folder   <- "OUTCOME_OVERLAY_VMEs"
- #a_folder2  <- "OUTCOME_FISHERIES_DISTR_VMS_AER_VMEs"
+ a_folder   <- "OUTCOME_OVERLAY"
+ a_folder2  <- "OUTCOME_FISHERIES_DISTR_VMS_AER"
  #!!!!!!!!!!!!!!!!!!!!#
  #!!!!!!!!!!!!!!!!!!!!#
  
@@ -357,15 +344,17 @@ return(e_mpas)
  bathy_0_800_1000     <- rast(file.path(getwd(), "INPUT_SPATIAL_LAYERS","GEBCO_May_2023","GEBCO_bathy_coding_for_o800_and_o1000m.tif"))              
 
  years                  <- c("2018", "2019", "2020", "2021","2018_2021")
- if (is_vms) metiers              <- "all_metiers" # ICES VMS is bottom metiers only...
+ if (is_vms) metiers              <- "all_metiers" 
  if (is_fdi) metiers              <- "all_bottom_metiers"
  for(yrs in years)
  {
  for (sce in sces){
     cat(paste0("Scenario ", sce, "\n"))
-    if(sce=="Closure2022") allclosures_sf <- VMEs_MARE
-    if(sce=="ICES_SceC")   allclosures_sf <- ICES_VMEs_SceC
-    if(sce=="ICES_SceD")   allclosures_sf <- ICES_VMEs_SceD
+    if(sce=="OWF")               allclosures_terra <- owf_terra 
+    if(sce=="currentMPAs")       allclosures_terra <- unique(rbind(mpas_rmv_bt_current, mpas_rmv_nts_current, mpas_rmv_lns_current))
+    if(sce=="MPAs")              allclosures_terra <- unique(rbind(mpas_rmv_bt, mpas_rmv_nts, mpas_rmv_lns))
+    if(sce=="OWF+currentMPAs")   allclosures_terra <- unique(rbind(owf_terra, mpas_rmv_bt_current, mpas_rmv_nts_current, mpas_rmv_lns_current))  # don´t forget to remove duplicates with unique()
+    if(sce=="OWF+MPAs")          allclosures_terra <- unique(rbind(owf_terra, mpas_rmv_bt, mpas_rmv_nts, mpas_rmv_lns))  # don´t forget to remove duplicates with unique()
  
  filepath             <- file.path(getwd(), a_folder2, metiers, yrs)
  rstr                 <- terra::rast(file.path(filepath, "spatRaster.tif")) # in "+proj=longlat +datum=WGS84"
@@ -377,11 +366,12 @@ return(e_mpas)
  r <- rast(nrow=dim(rstr)[1], ncol=dim(rstr)[2],
                                      extent=ext(rstr), res=res(rstr), crs=crs(rstr), vals=NA, names="value") # init
  # adding a csquare code
+ # note that a query tool for an individual c-square can be retrieved at http://www.cmar.csiro.au/csquares/about-mapper.htm
  cells <- 1:ncell(r)
  xy <- xyFromCell(r, cells)
  if(is_fdi) csquares <- vmstools::CSquare(xy[,"x"],xy[,"y"], degrees=0.5)
  if(is_vms) csquares <- vmstools::CSquare(xy[,"x"],xy[,"y"], degrees=0.05)
- values(r) <- csquares
+ values(r) <- 1:length(csquares)
  csquare_coding <- data.frame(id=c(values(r)), csquare=csquares, x=xy[,"x"], y=xy[,"y"])
  names(r)  <- "CSQUARE_ID"
  add(rstr) <- r
@@ -393,17 +383,20 @@ return(e_mpas)
  }
  if(is_vms){
   # figuring out what is the csquare codes of each polygon
-  e_csquares <- extract(rstr, vect(allclosures_sf)) 
+  e_csquares <- extract(rstr, allclosures_terra) 
   csquare_per_polygon_id_for_this_sce <- cbind.data.frame(e_csquares[, c("ID", "CSQUARE_ID")], csquare=csquare_coding[match(e_csquares[, "CSQUARE_ID"], csquare_coding$id), c("csquare", "x", "y")]) 
  }
  
  
  # subsetting to only keep the info on csquares containing the closure polygons
  dd <- values(rstr$CSQUARE_ID)
- idx_to_discard <- c(1:ncell(rstr))[!c(dd) %in% csquare_per_polygon_id_for_this_sce$CSQUARE_ID]
- rstr[idx_to_discard] <- NA
+ csquare_per_polygon_id_for_this_sce <- csquare_per_polygon_id_for_this_sce[!is.na(csquare_per_polygon_id_for_this_sce$CSQUARE_ID),] 
+ idx_to_discard <- c(1:ncell(rstr))[!(c(dd) %in% csquare_per_polygon_id_for_this_sce$CSQUARE_ID)]
+ values(rstr$GVA)[idx_to_discard] <- NA
  rstr <- trim(rstr)
- plot(rstr$GVA)
+ # check
+ plot(log(rstr$GVA))
+  
    
  # align both bathy and data rasters
  if(is_fdi) n <- 30
@@ -417,10 +410,11 @@ return(e_mpas)
  rstr_in_bathy_0_800         <- rstr_disagg + bathy_0_800_c 
  
  # rasterize the closure shape
- dd                          <- terra::vect(allclosures_sf)
+ if(is_fdi) dd               <- terra::vect(allclosures_sf)
+ if(is_vms) dd               <- allclosures_terra # a SpatVect needed
  dd$value                    <- 1
  closure_rast_terra          <- terra::rasterize(dd, y=rstr_in_bathy_0_800, field="value", fun=sum, na.rm=TRUE)
- rstr_closure                <- rstr_disagg + closure_rast_terra  + bathy_0_800_c 
+ rstr_closure                <- rstr_disagg + closure_rast_terra  + bathy_0_800_c   ## CAUTION: PASSIVE GEARS ARE NOT PREVENTED FROM VISITING THESE AREAS....
  surface_area_of_closure_csquare    <- cellSize(rstr_closure$CSQUARE_ID, unit="km", names="surface_area_closure")  # returns only for cells!=NA
  surface_area_of_closure_csquare    <- aggregate(surface_area_of_closure_csquare, n, fun= "sum", by="CSQUARE_ID", na.rm=TRUE)
  #=> this gives the surface of the closure in the fishable area
@@ -464,13 +458,16 @@ return(e_mpas)
   
   
  # a plot
- a_width <- 3000 ;  a_height <- 4000
- tiff(filename=file.path(getwd(), "OUTCOME_OVERLAY_VMEs", a_folder2,paste0("GVA_",metiers,"_in_impacted_csquare_from_", yrs,"_", sce, ".tif")), width = a_width, height = a_height,
+ a_width <- 4000 ;  a_height <- 4000
+ tiff(filename=file.path(getwd(), "OUTCOME_OVERLAY", a_folder2,paste0("GVA_",metiers,"_in_impacted_csquare_from_", yrs,"_", sce, ".tif")), width = a_width, height = a_height,
                                    units = "px", pointsize = 12,  res=600, compression = c("lzw"))
-     if(is_vms) plot(rstr_in_bathy_0_800$GVA/1e6, main=paste0(yrs, "GVA (MEuro) ", sce), breaks=c(-2, seq(0, 1, by=0.25), 2),  lwd=0.1)
+ par(oma=c(1,1,1,1))
+ par(mar=c(2,2,2,3))
+     if(is_vms) plot(rstr_in_bathy_0_800$GVA/1e6, main=paste0(yrs, "GVA (MEuro in 0.05 cells) ", sce), breaks=c(-2, -1, seq(0, 0.5, by=0.25), 5, 6),  lwd=0.1)
      if(is_fdi) plot(rstr_in_bathy_0_800$GVA/1e6, main=paste0(yrs, "GVA (MEuro) ", sce), breaks=c(-15, -5, -1, seq(0, 5, by=1), 50),  lwd=0.5)
-     plot(as.polygons(rstr$GVA), add=TRUE,  lwd=0.1)
-     plot(vect(allclosures_sf), add=TRUE, lwd=0.5)
+     #plot(as.polygons(rstr$GVA), add=TRUE,  lwd=0.1)
+     if(is_fdi) plot(vect(allclosures_sf), add=TRUE, lwd=0.5)
+     if(is_vms) plot(allclosures_terra, add=TRUE, lwd=0.5, border="grey")
      library(rnaturalearth)
      sf_world <- ne_countries(returnclass='sf')
      spdf_europe <- ne_countries(continent = "europe", scale=10)
@@ -482,7 +479,7 @@ return(e_mpas)
 } # end yrs
 
 save(lookup_table_prop_fishable_area,
-           file=file.path(file.path(getwd(), "OUTCOME_OVERLAY_VMEs", a_folder2, 
+           file=file.path(file.path(getwd(), "OUTCOME_OVERLAY", a_folder2, 
              paste0("lookup_prop_fishable_area.RData")))) 
     # prop of fishable area is constrained by bathymetry >-800
     # surface closure area specific to sce
