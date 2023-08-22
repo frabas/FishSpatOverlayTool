@@ -7,7 +7,7 @@
  
  
 # utils 
-what_is_inside <- function(filepath, allclosures_sf, reproject=FALSE)
+what_is_inside <- function(filepath, allclosures_sf, reproject=FALSE, doplot=FALSE)
 {
  
  library(terra)
@@ -46,14 +46,16 @@ what_is_inside <- function(filepath, allclosures_sf, reproject=FALSE)
  
  # reproject closures      
  allclosures_sf_eea <- st_transform(allclosures_sf, crs(rstr_eea))
- a_width <- 3000 ;  a_height <- 4000
- tiff(filename=file.path(file.path(getwd(), a_folder, a_folder2, "VectorExtract", paste0("e_mpas_",sce,"_",fs,"_",y,".tif"))), width = a_width, height = a_height,
+ if(doplot){
+    a_width <- 3000 ;  a_height <- 4000
+    sce <- gsub("+", "_", sce)
+    tiff(filename=file.path(file.path(getwd(), a_folder, a_folder2, "VectorExtract", paste0("e_mpas_",sce,"_",fs,"_",y,".tif"))), width = a_width, height = a_height,
                                    units = "px", pointsize = 12,  res=600, compression = c("lzw"))
   
    plot(log(rstr_eea_sub$landings_aer_in_ctry_level6_csquare), main="log of landings kg")
    plot(allclosures_sf_eea, add=TRUE, lwd=0.5, col=rgb(0.2,0.2,0.2,0.2))
- dev.off()
- 
+   dev.off()
+  } # end doplot
  
  # adding a csquare code
  r <- rast(nrow=dim(rstr_eea_sub)[1], ncol=dim(rstr_eea_sub)[2],
@@ -71,7 +73,6 @@ what_is_inside <- function(filepath, allclosures_sf, reproject=FALSE)
 # extract what is inside...
  # Caution here...It is not simple because basically the polygons are much small that the raster cells (in this FDI case)...
  # applying a multiplier on GVA will be later necessary.
- allclosures_vect_terra  <- vect(allclosures_sf_eea) 
  if(is_fdi) col_names               <- c("daysatsea_aer_in_ctry_level6_csquare","landings_aer_in_ctry_level6_csquare","value_aer_in_ctry_level6_csquare",
                                 "varcosts_in_ctry_level6_csquare", "oth_non_var_costs_in_csquare", "other_income_in_csquare","unpaid_labour_in_csquare", "personnelcosts_in_ctry_level6_csquare", "KwFishingdays_aer_in_ctry_level6_csquare",
                                  "lpue_csquare_fdi_kgperfday", "CSQUARE_ID")
@@ -97,8 +98,17 @@ what_is_inside <- function(filepath, allclosures_sf, reproject=FALSE)
  
  
   # retrieve the csquare coding
-  e_mpas <- cbind.data.frame(e_mpas, csquare=csquare_coding[match(e_mpas[, "CSQUARE_ID"], csquare_coding$id), "csquare"]) 
+  #e_mpas <- cbind.data.frame(e_mpas, csquare=csquare_coding[match(e_mpas[, "CSQUARE_ID"], csquare_coding$id), "csquare"]) 
+  e_mpas <- cbind.data.frame(e_mpas, csquare=e_mpas[, "CSQUARE_ID"]) 
 
+
+  e_mpas$GVA_cell <-  (an(e_mpas$landings_aer_in_ctry_level6_csquare) *  # landing kg  * price
+                      (an(e_mpas$value_aer_in_ctry_level6_csquare)/an(e_mpas$landings_aer_in_ctry_level6_csquare))) + 
+                      an(e_mpas$other_income_in_csquare) - # plus other income
+                      an(e_mpas$unpaid_labour_in_csquare) - an(e_mpas$varcosts_in_ctry_level6_csquare) - an(e_mpas$oth_non_var_costs_in_csquare)  # minus var and fixed costs
+         
+  e_mpas$GrossProfit_cell     <-  e_mpas$GVA_cell - an(e_mpas$personnelcosts_in_ctry_level6_csquare)
+      
  
  e_mpas              <- data.table(e_mpas)
 # then aggregate per c-square 
@@ -106,7 +116,7 @@ what_is_inside <- function(filepath, allclosures_sf, reproject=FALSE)
                                    .SDcols=c("daysatsea_aer_in_ctry_level6_csquare", "landings_aer_in_ctry_level6_csquare", "value_aer_in_ctry_level6_csquare",
                                       "varcosts_in_ctry_level6_csquare", "oth_non_var_costs_in_csquare",
                                           "other_income_in_csquare" ,"unpaid_labour_in_csquare", "personnelcosts_in_ctry_level6_csquare",
-                                     "KwFishingdays_aer_in_ctry_level6_csquare"), by=c("ID", "csquare")]
+                                     "KwFishingdays_aer_in_ctry_level6_csquare", "GVA_cell", "GrossProfit_cell"), by=c("ID", "csquare")]
  e_mpas_1               <- as.data.frame(e_mpas_1) 
  if(is_fdi) e_mpas_2              <- e_mpas[,lapply(.SD, sum, na.rm=TRUE),
                                    .SDcols=c("lpue_csquare_fdi_kgperfday"), by=c("ID","csquare")]
@@ -120,14 +130,22 @@ what_is_inside <- function(filepath, allclosures_sf, reproject=FALSE)
  # what about outside? which outside to get a percentage?
  #=> need to do the analysis per fs to compare with total per fs....
  library(data.table)
- a_dt <- data.table(as.data.frame(rstr_eea))
- ## aggregate per grID
+ a_df <- as.data.frame(rstr_eea)
+ a_df$GVA_cell <-  (an(a_df$landings_aer_in_ctry_level6_csquare) *  # landing kg  * price
+                      (an(a_df$value_aer_in_ctry_level6_csquare)/an(a_df$landings_aer_in_ctry_level6_csquare))) + 
+                      an(a_df$other_income_in_csquare) - # plus other income
+                      an(a_df$unpaid_labour_in_csquare) - an(a_df$varcosts_in_ctry_level6_csquare) - an(a_df$oth_non_var_costs_in_csquare)  # minus var and fixed costs
+         
+  a_df$GrossProfit_cell     <-  a_df$GVA_cell - an(a_df$personnelcosts_in_ctry_level6_csquare)
+  #a_df[a_df$GVA_cell<0, "GVA_cell"] <- 0  # ASSUMPTION HERE TO AVOID >100% IMPACT IN CASE GVA IS NEGATIVE OUTSIDE CLOSED AREAS....
+  a_dt <- data.table(a_df)
+  ## aggregate per grID
   a_dt_1 <- 
      a_dt[,lapply(.SD, sum, na.rm=TRUE),
       .SDcols=c("daysatsea_aer_in_ctry_level6_csquare", "landings_aer_in_ctry_level6_csquare", "value_aer_in_ctry_level6_csquare",
        "varcosts_in_ctry_level6_csquare", "oth_non_var_costs_in_csquare",
           "other_income_in_csquare" ,"unpaid_labour_in_csquare", "personnelcosts_in_ctry_level6_csquare",
-           "KwFishingdays_aer_in_ctry_level6_csquare")]
+           "KwFishingdays_aer_in_ctry_level6_csquare", "GVA_cell", "GrossProfit_cell")]
   if(is_fdi) a_dt_2 <- 
      a_dt[,lapply(.SD, mean, na.rm=TRUE),
       .SDcols=c("lpue_csquare_fdi_kgperfday")]
@@ -503,10 +521,10 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
 ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!##
 
 
- years                  <- c("2018_2021", "2018", "2019", "2020", "2021")
- #years                  <- c("2018_2021")
+ #years                  <- c("2018_2021", "2018", "2019", "2020", "2021")
+ years                  <- c("2018_2021")
 
- load(file=file.path(file.path(getwd(), "OUTCOME_OVERLAY_VMEs", a_folder2, 
+ load(file=file.path(file.path(getwd(), "OUTCOME_OVERLAY", a_folder2, 
              paste0("lookup_prop_fishable_area.RData"))))   # lookup_table_prop_fishable_area
            
  
@@ -516,35 +534,37 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  collector_extraction_per_fs_per_boxID <- NULL
  for (sce in sces){
     cat(paste0("Scenario ", sce, "\n"))
-    if(sce=="Closure2022") allclosures_sf <- VMEs_MARE
-    if(sce=="ICES_SceC")   allclosures_sf <- ICES_VMEs_SceC
-    if(sce=="ICES_SceD")   allclosures_sf <- ICES_VMEs_SceD
+    if(sce=="OWF")               allclosures_terra <- owf_terra 
+    if(sce=="currentMPAs")       allclosures_terra <- unique(rbind(mpas_rmv_bt_current, mpas_rmv_nts_current, mpas_rmv_lns_current))
+    if(sce=="MPAs")              allclosures_terra <- unique(rbind(mpas_rmv_bt, mpas_rmv_nts, mpas_rmv_lns))
+    if(sce=="OWF+currentMPAs")   allclosures_terra <- unique(rbind(owf_terra, mpas_rmv_bt_current, mpas_rmv_nts_current, mpas_rmv_lns_current))  # don´t forget to remove duplicates with unique()
+    if(sce=="OWF+MPAs")          allclosures_terra <- unique(rbind(owf_terra, mpas_rmv_bt, mpas_rmv_nts, mpas_rmv_lns))  # don´t forget to remove duplicates with unique()
+
     ## PER METIER----------
     # read-in the merged disagregated AER variables in shapfiles
     for(y in years){
      cat(paste0("Year ", y, "\n"))
      all_fs         <- list.files(file.path(getwd(),  a_folder2))
-     idx_fs_to_keep <- c(grep("DTS", all_fs), grep("TBB", all_fs), grep("DRB", all_fs), grep("HOK", all_fs), grep("DFN", all_fs)) # bottom contacting gears + hooks(longline) and nets (in FDI). only bottom gears in the ICES VMS
-     #idx_fs_to_keep <- c(grep("DTS", all_fs), grep("TBB", all_fs), grep("DRB", all_fs)) # bottom contacting gears only
-     all_fs         <- all_fs[idx_fs_to_keep]
-     all_fs         <- c("all_metiers", all_fs) #, "PRT_VL1218",     "PRT_VL1824",     "PRT_VL2440",     "PRT_VL40XX")
+     #idx_fs_to_keep <- c(grep("DTS", all_fs), grep("TBB", all_fs), grep("DRB", all_fs), grep("HOK", all_fs), grep("DFN", all_fs)) # bottom contacting gears + hooks(longline) and nets (in FDI). only bottom gears in the ICES VMS
+     #all_fs         <- all_fs[idx_fs_to_keep]
+     #all_fs         <- c("all_metiers", all_fs) 
      for (fs in all_fs)
        {
        cat(paste0("Fleet-segment ", fs, "\n"))
        library(data.table)
        filepath             <- file.path(getwd(), a_folder2, fs, y)
-       e_mpas_this_metier <- what_is_inside (filepath, allclosures_sf, reproject=FALSE) # caution with a reproject at TRUE cause the resampling will blur estimates....
+       e_mpas_this_metier <- what_is_inside (filepath, st_as_sf(allclosures_terra), reproject=FALSE, doplot=FALSE) # caution with a reproject at TRUE cause the resampling will blur estimates....
   
   
        if(!is.null(e_mpas_this_metier)){
           an <- function (x) as.numeric(x)
-          e_mpas_this_metier$GVA_cell <-  (an(e_mpas_this_metier$landings_aer_in_ctry_level6_csquare) *  # landing kg  * price
-                      (an(e_mpas_this_metier$value_aer_in_ctry_level6_csquare)/an(e_mpas_this_metier$landings_aer_in_ctry_level6_csquare))) + 
-                      an(e_mpas_this_metier$other_income_in_csquare) - # plus other income
-                      an(e_mpas_this_metier$unpaid_labour_in_csquare) - an(e_mpas_this_metier$varcosts_in_ctry_level6_csquare) - an(e_mpas_this_metier$oth_non_var_costs_in_csquare)  # minus var and fixed costs
+     #     e_mpas_this_metier$GVA_cell <-  (an(e_mpas_this_metier$landings_aer_in_ctry_level6_csquare) *  # landing kg  * price
+     #                 (an(e_mpas_this_metier$value_aer_in_ctry_level6_csquare)/an(e_mpas_this_metier$landings_aer_in_ctry_level6_csquare))) + 
+     #                 an(e_mpas_this_metier$other_income_in_csquare) - # plus other income
+     #                 an(e_mpas_this_metier$unpaid_labour_in_csquare) - an(e_mpas_this_metier$varcosts_in_ctry_level6_csquare) - an(e_mpas_this_metier$oth_non_var_costs_in_csquare)  # minus var and fixed costs
          e_mpas_this_metier$GVA_all <-  e_mpas_this_metier[e_mpas_this_metier$what=="all layer cells","GVA_cell"]  # track the value to get a proportion later on
          
-         e_mpas_this_metier$GrossProfit_cell     <-  e_mpas_this_metier$GVA_cell - an(e_mpas_this_metier$personnelcosts_in_ctry_level6_csquare)
+     #    e_mpas_this_metier$GrossProfit_cell     <-  e_mpas_this_metier$GVA_cell - an(e_mpas_this_metier$personnelcosts_in_ctry_level6_csquare)
          e_mpas_this_metier$GrossProfit_GVA_all  <- e_mpas_this_metier[e_mpas_this_metier$what=="all layer cells","GrossProfit_cell"]  # track the value to get a proportion later on
         
                       
@@ -566,9 +586,9 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
        e_mpas_this_metier_m$prop_GVA_inside <-  e_mpas_this_metier_m$GVAimpacted/  e_mpas_this_metier_m$GVA_all  
        
 
-       dd <- knitr::kable(as.data.frame(e_mpas_this_metier_m), format = "html")
-       library(readr)
-       readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, "VectorExtract", paste0("e_mpas_",sce,"_",fs,"_",y,".html"))) 
+       #dd <- knitr::kable(as.data.frame(e_mpas_this_metier_m), format = "html")
+       #library(readr)
+       #readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, "VectorExtract", paste0("e_mpas_",sce,"_",fs,"_",y,".html"))) 
 
     
       # collector 
@@ -582,9 +602,9 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
                         
  
  # general outcome 
- library(readr)
- dd <- knitr::kable(as.data.frame(collector_extraction_per_fs_per_boxID), format = "html")
- readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_","2018", "_","2021",".html"))) 
+ #library(readr)
+ #dd <- knitr::kable(as.data.frame(collector_extraction_per_fs_per_boxID), format = "html")
+ #readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_","2018", "_","2021",".html"))) 
  save(collector_extraction_per_fs_per_boxID, file=file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_","2018", "_","2021",".RData"))) 
  # caution with this dataset here because of doubling counting if deduced from the fdi given there might be several boxes within a same coarse 0.5 c-square...remove duplicates if needed
 
@@ -603,12 +623,10 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  
  #!!!!!!!!!!!!!!!!!!!!#
  #!!!!!!!!!!!!!!!!!!!!#
- sces       <- c("Closure2022", "ICES_SceC", "ICES_SceD")
+ sces <- c("OWF", "currentMPAs", "MPAs", "OWF+currentMPAs", "OWF+MPAs") 
  years      <- 2018:2021
- a_folder   <- "OUTCOME_OVERLAY_VMEs"
- a_folder2  <- "OUTCOME_FISHERIES_DISTR_FDI_AER"
- #a_folder   <- "OUTCOME_OVERLAY_VMEs"
- #a_folder2  <- "OUTCOME_FISHERIES_DISTR_VMS_AER_VMEs"
+ a_folder   <- "OUTCOME_OVERLAY"
+ a_folder2  <- "OUTCOME_FISHERIES_DISTR_VMS_AER"
  yrs <- "2018_2021" 
  #!!!!!!!!!!!!!!!!!!!!#
  #!!!!!!!!!!!!!!!!!!!!#
@@ -632,11 +650,11 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  head(extract_df[extract_df$sce==sce & extract_df$csquare=="3002:100:3" & extract_df$year ==yrs & extract_df$fs=="ESP_DTS_VL1824",])
 
  
- # Remove duplicates of values to avoid double counting if several box ID lying within the same a c-square
+ # Remove duplicates of values to avoid double counting if several box ID lying within the same  c-square
  extract_df <- extract_df [!duplicated(extract_df[,c("sce","csquare", "fs", "year")]),]
 
 
- dd <- aggregate(extract_df[extract_df$sce=="Closure2022",][,c("prop_GVA_inside")], by=list(extract_df[extract_df$sce=="Closure2022",]$fs), sum, na.rm=TRUE) # sum over ID
+ dd <- aggregate(extract_df[extract_df$sce=="currentMPAs",][,c("prop_GVA_inside")], by=list(extract_df[extract_df$sce=="currentMPAs",]$fs), sum, na.rm=TRUE) # sum over ID
  library(doBy)
  dd <- dd[round(dd$x, 5)!=0,]
  dd <- orderBy(~ - x, dd)
@@ -654,11 +672,12 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  ## GGPLOT 1
  ##-----------------------------------------------------------------------------
  ##-----------------------------------------------------------------------------
- p1 <- ggplot(extract_df[,c("prop_GVA_inside", "fs", "vessel_size", "sce")], aes(x =  prop_GVA_inside*100, y=fs, fill=vessel_size))  + geom_bar(stat = "summary", fun = "sum", position = "dodge") + facet_wrap(~sce, ncol=3)  +
-                      ggtitle(paste0("Extract in SWW and NWW")) + xlab(paste0("Percent in ",yrs, " of impacted GVA inside VMEs areas")) + ylab("AER Fleet-segments") +
+ library(ggplot2)
+ p1 <- ggplot(extract_df[,c("prop_GVA_inside", "fs", "vessel_size", "sce")], aes(x =  prop_GVA_inside*100, y=fs, fill=vessel_size))  + geom_bar(stat = "summary", fun = function(x) sum(x), position = "dodge") + facet_wrap(~sce, ncol=3)  +
+                      ggtitle(paste0("Extract in SWW and NWW")) + xlab(paste0("Percent in ",yrs, " of impacted GVA inside restricted areas")) + ylab("AER Fleet-segments") +
                       scale_fill_manual(values=c(VL0010="#F8766D", VL1012="#B79F00", VL1218="#00BA38", VL1824="#00BFC4", VL2440="#619CFF", VL40XX="#F564E3"))  
   a_width <- 6000 ; a_height <- 4500
-       tiff(filename=file.path(getwd(), "OUTCOME_OVERLAY_VMEs", a_folder2, paste0("Proportion_of_GVA_inside_impacted_c-squares.tif")), width = a_width, height = a_height,
+       tiff(filename=file.path(getwd(), "OUTCOME_OVERLAY", a_folder2, paste0("Proportion_of_GVA_inside_impacted_c-squares.tif")), width = a_width, height = a_height,
                                    units = "px", pointsize = 12,  res=600, compression = c("lzw"))
      print(p1)
  dev.off()
