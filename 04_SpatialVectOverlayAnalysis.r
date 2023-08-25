@@ -1,3 +1,4 @@
+# Author: Francois Bastardie (DTU-Aqua), June 2023       
 
 ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
 # A quick spatial overlay!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
@@ -137,7 +138,7 @@ what_is_inside <- function(filepath, allclosures_sf, reproject=FALSE, doplot=FAL
                       an(a_df$unpaid_labour_in_csquare) - an(a_df$varcosts_in_ctry_level6_csquare) - an(a_df$oth_non_var_costs_in_csquare)  # minus var and fixed costs
          
   a_df$GrossProfit_cell     <-  a_df$GVA_cell - an(a_df$personnelcosts_in_ctry_level6_csquare)
-  #a_df[a_df$GVA_cell<0, "GVA_cell"] <- 0  # ASSUMPTION HERE TO AVOID >100% IMPACT IN CASE GVA IS NEGATIVE OUTSIDE CLOSED AREAS....
+  #a_df[a_df$GVA_cell<0, "GVA_cell"] <- 0  # ASSUMPTION HERE TO AVOID >100% IMPACT IN CASE GVA IS BROADLY NEGATIVE OUTSIDE CLOSED AREAS, WHICH IS WEIRD TO COMMUNICATE....
   a_dt <- data.table(a_df)
   ## aggregate per grID
   a_dt_1 <- 
@@ -522,8 +523,9 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
 
 
  #years                  <- c("2018_2021", "2018", "2019", "2020", "2021")
- years                  <- c("2018_2021")
-
+ #years                  <- c("2018_2021")
+ years                  <- c("2021")
+ 
  load(file=file.path(file.path(getwd(), "OUTCOME_OVERLAY", a_folder2, 
              paste0("lookup_prop_fishable_area.RData"))))   # lookup_table_prop_fishable_area
            
@@ -605,7 +607,9 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  #library(readr)
  #dd <- knitr::kable(as.data.frame(collector_extraction_per_fs_per_boxID), format = "html")
  #readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_","2018", "_","2021",".html"))) 
- save(collector_extraction_per_fs_per_boxID, file=file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_","2018", "_","2021",".RData"))) 
+ 
+ #save(collector_extraction_per_fs_per_boxID, file=file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_","2018", "_","2021",".RData"))) 
+ save(collector_extraction_per_fs_per_boxID, file=file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_","2021",".RData"))) 
  # caution with this dataset here because of doubling counting if deduced from the fdi given there might be several boxes within a same coarse 0.5 c-square...remove duplicates if needed
 
 
@@ -627,12 +631,13 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  years      <- 2018:2021
  a_folder   <- "OUTCOME_OVERLAY"
  a_folder2  <- "OUTCOME_FISHERIES_DISTR_VMS_AER"
- yrs <- "2018_2021" 
+ #yrs <- "2018_2021" 
+ yrs <- "2021" 
  #!!!!!!!!!!!!!!!!!!!!#
  #!!!!!!!!!!!!!!!!!!!!#
  
 
- load(file=file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_","2018", "_","2021",".RData")))  # collector_extraction_per_fs_per_boxID
+ load(file=file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_",yrs,".RData")))  # collector_extraction_per_fs_per_boxID
 
  extract_df <- collector_extraction_per_fs_per_boxID
  
@@ -711,10 +716,11 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  
  a_df <- extract_df[,c("GVAimpacted", "fs", "vessel_size", "sce", "csquare")]
  a_df <- a_df[an(a_df$GVAimpacted)>15000,] # put a threshold of 100000 Euros to lighten the figure...
+ an <- function(x) as.numeric(as.character(x))
  p2 <- ggplot(a_df, aes(x =  GVAimpacted/1e6, y=csquare, fill=fs))  + geom_bar(stat = "summary", fun = "mean", position = "stack") + facet_wrap(~sce, ncol=3)  +
-                      ggtitle(paste0("Extract in SWW and NWW")) + xlab(paste0("GVA (MEuro) of ",yrs, " estimated inside VMEs areas")) + ylab("Csquare code") +guides(fill=guide_legend(ncol =1))
+                      ggtitle(paste0("Extract in NEA")) + xlab(paste0("GVA (MEuro) of ",yrs, " estimated inside VMEs areas")) + ylab("Csquare code") +guides(fill=guide_legend(ncol =1))
   a_width <- 3000 ; a_height <- 5000
-       tiff(filename=file.path(getwd(), "OUTCOME_OVERLAY_VMEs", a_folder2, paste0("Absolute_GVA_inside_VMEs_per_csquare.tif")), width = a_width, height = a_height,
+       tiff(filename=file.path(getwd(), "OUTCOME_OVERLAY", a_folder2, paste0("Absolute_GVA_inside_per_csquare.tif")), width = a_width, height = a_height,
                                    units = "px", pointsize = 12,  res=300, compression = c("lzw"))
  p2
  dev.off()
@@ -862,15 +868,32 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
 ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
 ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
 
+
+ library(ggplot2)
+ 
+ #!!!!!!!!!!!!!!!!!!!!#
+ #!!!!!!!!!!!!!!!!!!!!#
+ sces <- c("OWF", "currentMPAs", "MPAs", "OWF+currentMPAs", "OWF+MPAs") 
+ years      <- 2018:2021
+ a_folder   <- "OUTCOME_OVERLAY"
+ a_folder2  <- "OUTCOME_FISHERIES_DISTR_VMS_AER"
+ #yrs <- "2018_2021" 
+ yrs <- "2021" 
+ #!!!!!!!!!!!!!!!!!!!!#
+ #!!!!!!!!!!!!!!!!!!!!#
+ 
+
  library(data.table)
  ROutputPathToDatasets <- file.path(getwd(), "OUTCOME_DATASETS")
  if(is_fdi) load(file=file.path(ROutputPathToDatasets, "agg_2018_2021_fdi_2023aer_eco_fs.RData")) # get agg_eco_fs 
- if(is_vms) load(file=file.path(ROutputPathToDatasets, "agg_ices_vms_2018_2021_aer_eco_fs.RData")) # get agg_eco_fs 
+ if(is_vms) load(file=file.path(ROutputPathToDatasets, "agg_ices_vms_2018_2021_aer_eco_fs.RData")) # get agg_eco_fs for VMEs ad hoc 
+ if(is_vms) load(file=file.path(ROutputPathToDatasets, "agg_vms_aer_eco_fs.RData")) # get agg_eco_fs for SeaWise
 
  head(agg_eco_fs[fs=="ESP_DTS_VL2440",])
 
 
- load(file=file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_2018_2021.RData")))  # collector_extraction_per_fs_per_boxID
+ #load(file=file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_2018_2021.RData")))  # collector_extraction_per_fs_per_boxID
+ load(file=file.path(getwd(), a_folder, a_folder2, paste0("collector_extraction_per_fs_per_boxID_2021.RData")))  # collector_extraction_per_fs_per_boxID
  extract_df <- collector_extraction_per_fs_per_boxID
  library(stringr)
  temp <- as.data.frame(str_split_fixed(extract_df$fs,"_",3))  
@@ -881,8 +904,7 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  # Remove duplicates of values to avoid double counting if several box ID lying within the same a c-square
  extract_df <- extract_df [!duplicated(extract_df[,c("sce","csquare", "fs", "year")]),]
 
- 
- dd <- aggregate(extract_df[extract_df$sce=="Closure2022",][,c("prop_GVA_inside")], by=list(extract_df[extract_df$sce=="Closure2022",]$fs), sum, na.rm=TRUE) # sum over ID
+ dd <- aggregate(extract_df[extract_df$sce=="currentMPAs",][,c("prop_GVA_inside")], by=list(extract_df[extract_df$sce=="currentMPAs",]$fs), sum, na.rm=TRUE) # sum over ID
  library(doBy)
  dd <- dd[round(dd$x, 5)!=0,]
  dd <- orderBy(~ - x, dd)
@@ -891,12 +913,15 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  fs_to_keep <-  fs_to_keep[fs_to_keep!="all_metiers"]
  
  extract_df <- extract_df[!is.na(extract_df$prop_GVA_inside) & extract_df$fs %in% fs_to_keep,]  # threshold for visualisation
+ 
+ extract_df$fs <- factor (extract_df$fs, levels=fs_to_keep) # re-order in consistence with a_df
 
  # check
  agg_eco_fs[agg_eco_fs$fs=="ESP_DTS_VL2440",]
  
  opportunity_interest_rate  <- 4.0 # ??
  annual_depreciation_rate   <- 2.0 # ??
+ an <- function(x) as.numeric(as.character(x))
  agg_eco_fs$CapitalOpportunityCosts    <- an(agg_eco_fs$value_of_physical_capital) * opportunity_interest_rate/100.0 
 
 
@@ -908,14 +933,27 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  extract_dt$year <- an(extract_dt$year)
  agg_eco_fs$year <- an(agg_eco_fs$year)
   
+ # here we are:
  agg_eco_fs_with_impacted_gva <- merge(extract_dt, agg_eco_fs) 
 
  # check
  agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$fs=="ESP_DTS_VL1218",]
  
- # anticipated GVA
- agg_eco_fs_with_impacted_gva$anticipated_GVA <- agg_eco_fs_with_impacted_gva$GVA - agg_eco_fs_with_impacted_gva$GVAimpacted
- agg_eco_fs_with_impacted_gva$anticipated_GrossProfit <- agg_eco_fs_with_impacted_gva$GrossProfit - agg_eco_fs_with_impacted_gva$GrossProfitimpacted
+ # anticipated GVA (caution with sign)
+ # default:
+ agg_eco_fs_with_impacted_gva <- as.data.frame(agg_eco_fs_with_impacted_gva)
+ agg_eco_fs_with_impacted_gva$anticipated_GVA <- NA
+ agg_eco_fs_with_impacted_gva[, "anticipated_GVA"]         <- agg_eco_fs_with_impacted_gva[, "GVA"] - agg_eco_fs_with_impacted_gva[, "GVAimpacted"]
+ agg_eco_fs_with_impacted_gva$anticipated_GrossProfit <- NA
+ agg_eco_fs_with_impacted_gva[, "anticipated_GrossProfit"] <- agg_eco_fs_with_impacted_gva[, "GrossProfit"] - agg_eco_fs_with_impacted_gva[, "GrossProfitimpacted"]
+ # if GVA negative, then correct:
+ idx <- agg_eco_fs_with_impacted_gva$GVA <0 & agg_eco_fs_with_impacted_gva$GVAimpacted >0
+ agg_eco_fs_with_impacted_gva[idx, "anticipated_GVA"]         <- agg_eco_fs_with_impacted_gva[idx, "GVA"] + agg_eco_fs_with_impacted_gva[idx, "GVAimpacted"]
+ idx <- agg_eco_fs_with_impacted_gva$GrossProfit <0 & agg_eco_fs_with_impacted_gva$GrossProfitimpacted >0
+ agg_eco_fs_with_impacted_gva[idx, "anticipated_GrossProfit"] <- agg_eco_fs_with_impacted_gva[idx, "GrossProfit"] + agg_eco_fs_with_impacted_gva[idx, "GrossProfitimpacted"]
+ agg_eco_fs_with_impacted_gva <- data.table(agg_eco_fs_with_impacted_gva)
+ 
+ 
  
  # then recompute net profit
  agg_eco_fs_with_impacted_gva$anticipated_OperatingProfit <-  agg_eco_fs_with_impacted_gva$anticipated_GrossProfit - an(agg_eco_fs_with_impacted_gva$cons_of_fixed_capital)
@@ -927,8 +965,12 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  agg_eco_fs_with_impacted_gva$percent_change_NetProfit  <-  round(((agg_eco_fs_with_impacted_gva$anticipated_NetProfit/agg_eco_fs_with_impacted_gva$NetProfit)*100) -100, 2)
  
  # correct sign
- agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$anticipated_NetProfit<0 & agg_eco_fs_with_impacted_gva$anticipated_NetProfit<0,"percent_change_NetProfit"] <- 
-                                            agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$anticipated_NetProfit<0 & agg_eco_fs_with_impacted_gva$anticipated_NetProfit<0,"percent_change_NetProfit"] * -1
+ agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$GVA<0 & agg_eco_fs_with_impacted_gva$anticipated_GVA<0,"percent_change_GVA"] <- 
+                                            agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$GVA<0 & agg_eco_fs_with_impacted_gva$anticipated_GVA<0,"percent_change_GVA"] * -1
+ agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$GrossProfit<0 & agg_eco_fs_with_impacted_gva$anticipated_GrossProfit<0,"percent_change_GrossProfit"] <- 
+                                            agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$GrossProfit<0 & agg_eco_fs_with_impacted_gva$anticipated_GrossProfit<0,"percent_change_GrossProfit"] * -1
+ agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$NetProfit<0 & agg_eco_fs_with_impacted_gva$anticipated_NetProfit<0,"percent_change_NetProfit"] <- 
+                                            agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$NetProfit<0 & agg_eco_fs_with_impacted_gva$anticipated_NetProfit<0,"percent_change_NetProfit"] * -1
  
  # check
  agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$fs=="ESP_DTS_VL1824"]
@@ -949,20 +991,20 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  # export
  library(readr)
  dd <- knitr::kable(as.data.frame(agg_eco_fs_with_impacted_gva[, c("year","fs", "sce", "GVAMEuro", "GrossProfitMEuro", "NetProfitMEuro", "GVAimpactedMEuro", "percent_change_GVA", "percent_change_GrossProfit", "percent_change_NetProfit", "engagedCrew")]), format = "html")
- readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_","2018", "_","2021",".html"))) 
- save(agg_eco_fs_with_impacted_gva, file=file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_","2018", "_","2021",".RData"))) 
+ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_",yrs,".html"))) 
+ save(agg_eco_fs_with_impacted_gva, file=file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_",yrs,".RData"))) 
 
  a_subset_of_agg_eco_fs_with_impacted_gva <- agg_eco_fs_with_impacted_gva[an(agg_eco_fs_with_impacted_gva$percent_change_GVA)< -1,]
  a_subset_of_agg_eco_fs_with_impacted_gva <- orderBy(~  - year - GVAMEuro 	 + sce, as.data.frame(a_subset_of_agg_eco_fs_with_impacted_gva))
  dd <- knitr::kable(as.data.frame(a_subset_of_agg_eco_fs_with_impacted_gva[, c("year","fs", "sce", "GVAMEuro", "GrossProfitMEuro", "NetProfitMEuro", "GVAimpactedMEuro", "percent_change_GVA", "percent_change_GrossProfit", "percent_change_NetProfit", "engagedCrew")]), format = "html")
- readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_","2018", "_","2021_a_subset",".html"))) 
- save(a_subset_of_agg_eco_fs_with_impacted_gva, file=file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_","2018", "_","2021_a_subset",".RData"))) 
+ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_",yrs, "_a_subset",".html"))) 
+ save(a_subset_of_agg_eco_fs_with_impacted_gva, file=file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_",yrs, "_a_subset",".RData"))) 
 
 
  agg_eco_fs_with_impacted_gva <- orderBy(~  - year - GVAMEuro 	 + sce, as.data.frame(agg_eco_fs_with_impacted_gva))
  dd <- knitr::kable(as.data.frame(agg_eco_fs_with_impacted_gva[agg_eco_fs_with_impacted_gva$fs %in% c("ESP_DTS_VL1824", "ESP_DTS_VL2440"), c("year","fs", "sce", "GVAMEuro", "GrossProfitMEuro", "NetProfitMEuro", "GVAimpactedMEuro", "percent_change_GVA", "percent_change_GrossProfit", "percent_change_NetProfit", "engagedCrew")]), format = "html")
- readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_","2018", "_","2021_MAIN_FLEETS",".html"))) 
- save(agg_eco_fs_with_impacted_gva, file=file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_","2018", "_","2021_MAIN_FLEETS",".RData"))) 
+ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_",yrs, "_MAIN_FLEETS",".html"))) 
+ save(agg_eco_fs_with_impacted_gva, file=file.path(getwd(), a_folder, a_folder2, paste0("agg_eco_fs_with_impacted_gva_",yrs,"_MAIN_FLEETS",".RData"))) 
  
  
  
@@ -981,13 +1023,18 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  
  agg_eco_fs_with_impacted_gva$fs <- factor (agg_eco_fs_with_impacted_gva$fs, levels=fs_to_keep) # re-order in consistence with a_df
 
+
+ # cap to -80 to 80%....cause outliers are making visualisation tricky... 
+ agg_eco_fs_with_impacted_gva[!is.na(agg_eco_fs_with_impacted_gva$percent_change_NetProfit) & agg_eco_fs_with_impacted_gva$percent_change_NetProfit>80,"percent_change_NetProfit"] <- 80
+ agg_eco_fs_with_impacted_gva[!is.na(agg_eco_fs_with_impacted_gva$percent_change_NetProfit) & agg_eco_fs_with_impacted_gva$percent_change_NetProfit < -80,"percent_change_NetProfit"] <- -80
+ agg_eco_fs_with_impacted_gva <- agg_eco_fs_with_impacted_gva[!is.na(agg_eco_fs_with_impacted_gva$percent_change_NetProfit), ]  # for fs with imcomplete infos...
  
  p4 <- ggplot(agg_eco_fs_with_impacted_gva[,c("percent_change_NetProfit", "fs", "vessel_size", "sce")], aes(x =  percent_change_NetProfit, y=fs, fill=vessel_size))  + geom_bar(stat = "summary", fun = "mean", position = "dodge") + facet_wrap(~sce, ncol=3)  +
                       ggtitle(paste0("Anticipated change in fleet economy")) + xlab(paste0("Change in ",yrs, " of impacted Net Profit")) + ylab("AER Fleet-segments") +
                                            scale_fill_manual(values=c(VL0010="#F8766D", VL1012="#B79F00", VL1218="#00BA38", VL1824="#00BFC4", VL2440="#619CFF", VL40XX="#F564E3"))  
  
-  a_width <- 6000 ; a_height <- 4500
-  tiff(filename=file.path(getwd(), "OUTCOME_OVERLAY_VMEs", a_folder2, paste0("Anticipated_change_of_net_profit_in ",yrs, ".tif")), width = a_width, height = a_height,
+  a_width <- 6000 ; a_height <- 5500
+  tiff(filename=file.path(getwd(), "OUTCOME_OVERLAY", a_folder2, paste0("Anticipated_change_of_net_profit_in ",yrs, ".tif")), width = a_width, height = a_height,
                                    units = "px", pointsize = 12,  res=600, compression = c("lzw"))
      print(p4)
  dev.off()
@@ -1006,8 +1053,8 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  # export
  library(readr)
  dd <- knitr::kable(as.data.frame(pd[, c("fs", "sce", "Percent")]), format = "html")
- readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("ggplot_data_percent_of_Net_profit_change_","2018", "_","2021",".html"))) 
- save(pd, file=file.path(getwd(), a_folder, a_folder2, paste0("ggplot_data_percent_of_Net_profit_change_","2018", "_","2021",".RData"))) 
+ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("ggplot_data_percent_of_Net_profit_change_",yrs,".html"))) 
+ save(pd, file=file.path(getwd(), a_folder, a_folder2, paste0("ggplot_data_percent_of_Net_profit_change_",yrs,".RData"))) 
 
  
 
@@ -1024,13 +1071,15 @@ readr::write_file(dd, file.path(getwd(), a_folder, a_folder2, paste0("impacted_s
  dd <- data.table(dd)
  dd <- dd[,.(engagedCrew=mean(engagedCrew), percent_change_GVA=mean(percent_change_GVA)), by=c("fs", "sce", "vessel_size")]
  
+ dd[dd$percent_change_GVA<= -100 | is.infinite(dd$percent_change_GVA), "percent_change_GVA"] <- -99 # for visualisation 
+ dd[dd$percent_change_GVA>= 100 | is.infinite(dd$percent_change_GVA), "percent_change_GVA"] <- 99 # for visualisation 
  dd$cat_change_GVA <- cut(dd$percent_change_GVA, breaks=c(-100, seq(-10,10, by=1), 100))
  
  p5 <- ggplot(dd, aes(x =  engagedCrew, y=cat_change_GVA, fill=vessel_size))  + geom_bar(stat = "summary", fun = "sum", position = "dodge") + facet_wrap(~sce, ncol=3)  +
                       ggtitle(paste0("Anticipated change in fleet economy")) + xlab(paste0("Engaged crew number in ",yrs, " impacted by change in % GVA category")) + ylab("% change of GVA categories")  +
                                            scale_fill_manual(values=c(VL0010="#F8766D", VL1012="#B79F00", VL1218="#00BA38", VL1824="#00BFC4", VL2440="#619CFF", VL40XX="#F564E3"))  
-  a_width <- 7000 ; a_height <- 3500
-       tiff(filename=file.path(getwd(), "OUTCOME_OVERLAY_VMEs", a_folder2, paste0("Impacted_engaged_crew_in ",yrs, ".tif")), width = a_width, height = a_height,
+  a_width <- 6000 ; a_height <- 5500
+       tiff(filename=file.path(getwd(), "OUTCOME_OVERLAY", a_folder2, paste0("Impacted_engaged_crew_in ",yrs, ".tif")), width = a_width, height = a_height,
                                    units = "px", pointsize = 12,  res=600, compression = c("lzw"))
      print(p5)
  dev.off()
