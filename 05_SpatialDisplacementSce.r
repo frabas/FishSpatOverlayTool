@@ -941,7 +941,8 @@ if(a_reg!="ALL_REGIONS"){
           dd <- extra_effort* data_layers_on_area_open_this_fs$lpue * data_layers_on_area_open_this_fs$EffortDisplWeighted * 
                       (data_layers_on_area_open_this_fs$value_aer_in_ctry_level6_csquare / data_layers_on_area_open_this_fs$landings_aer_in_ctry_level6_csquare) +
                       data_layers_on_area_open_this_fs$other_income_in_csquare -
-                      data_layers_on_area_open_this_fs$unpaid_labour_in_csquare - data_layers_on_area_open_this_fs$varcosts_in_ctry_level6_csquare
+                      data_layers_on_area_open_this_fs$unpaid_labour_in_csquare - (extra_effort*data_layers_on_area_open_this_fs$varcosts_in_ctry_level6_csquare)
+         extra_varcosts <- (extra_effort*data_layers_on_area_open_this_fs$varcosts_in_ctry_level6_csquare)-data_layers_on_area_open_this_fs$varcosts_in_ctry_level6_csquare # proxy of most likely extra fuel use needed           
          a_sum <- sum(dd[], na.rm=TRUE)
          this_logratio <- log(a_sum/GAV_base)
            # a_logratio_b for GVA
@@ -998,7 +999,9 @@ if(a_reg!="ALL_REGIONS"){
                                      cbind.data.frame(sce=scename, fs=fs, variable="logratio_u_GVA_after_before", value= a_logratio_u, variable_used_to_redistribute=variable_used_to_redistribute),                                                     
                                      cbind.data.frame(sce=scename, fs=fs, variable="logratio_b_GVA_after_before", value= a_logratio_b, variable_used_to_redistribute=variable_used_to_redistribute),                                                     
                                      cbind.data.frame(sce=scename, fs=fs, variable="logratio_GVA_after_before", value= a_logratio, variable_used_to_redistribute=variable_used_to_redistribute),                                                     
-                                     cbind.data.frame(sce=scename, fs=fs, variable="extra_effort_multiplier", value= extra_effort, variable_used_to_redistribute=variable_used_to_redistribute)                                                     
+                                     cbind.data.frame(sce=scename, fs=fs, variable="extra_effort_multiplier", value= extra_effort, variable_used_to_redistribute=variable_used_to_redistribute),
+                                     cbind.data.frame(sce=scename, fs=fs, variable="extra_varcosts", value= extra_varcosts, variable_used_to_redistribute=variable_used_to_redistribute)
+                                                                                          
                                     )                   
    # caution about the effort metric depending on the source of data: VMS=> FishingHour; FDI=>fditotfishdays                             
                                       

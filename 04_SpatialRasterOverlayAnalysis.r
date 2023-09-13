@@ -24,6 +24,7 @@
  
  years_span <- "2018_2021"
  
+ a_folder   <- "OUTCOME_FISHERIES_DISTR_VMS_AER"
 
 ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
 ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
@@ -113,7 +114,7 @@
   fishable_bob_eea <- project(fishable_bob, "+proj=laea +lat_0=52 +lon_0=10 +x_0=4321000 +y_0=3210000 +ellps=GRS80 +units=m +no_defs")
   area_cell                               <- prod(res(fishable_bob_eea))/1e6 # converted in km^2 as the resolution of the raster is in meter
   fishable_bob_eea[!is.na(fishable_bob_eea) & fishable_bob_eea>2] <- NA  # no fishing allowed if < -800m in the NEA
-  fishable_bob_eea[!is.na(fishable_bs_eea)] <- 1
+  fishable_bob_eea[!is.na(fishable_bob_eea)] <- 1
   sum_fishable_area_km2_bob <- sum(sum(fishable_bob_eea * area_cell)[], na.rm=TRUE)
 
 
@@ -151,6 +152,7 @@
  fished_bs_eea[!is.na(fished_bs_eea) & fished_bs_eea<10] <- NA # use a threshold to avoid noise
  fished_bs_eea[!is.na(fished_bs_eea)] <- 1 # all grid cells with effort > 10h
  sum_fished_area_km2_bs <- sum(sum(fished_bs_eea * area_cell)[], na.rm=TRUE)
+ sum_fished_area_km2_bs/sum_fishable_area_km2_bs  # proportion of surface area fished in this region for the time period examined
 
  # cs
  fished_cs                    <- cs_raster_005 +  aer_layers$FishingHour
@@ -159,6 +161,7 @@
  fished_cs_eea[!is.na(fished_cs_eea) & fished_cs_eea<10] <- NA # use a threshold to avoid noise
  fished_cs_eea[!is.na(fished_cs_eea)] <- 1 # all grid cells with effort > 10h
  sum_fished_area_km2_cs <- sum(sum(fished_cs_eea * area_cell)[], na.rm=TRUE)
+ sum_fished_area_km2_cs/sum_fishable_area_km2_cs  # proportion of surface area fished in this region for the time period examined
 
  # bob
  fished_bob                    <- bob_raster_005 +  aer_layers$FishingHour
@@ -167,6 +170,7 @@
  fished_bob_eea[!is.na(fished_bob_eea) & fished_bob_eea<10] <- NA # use a threshold to avoid noise
  fished_bob_eea[!is.na(fished_bob_eea)] <- 1 # all grid cells with effort > 10h
  sum_fished_area_km2_bob <- sum(sum(fished_bob_eea * area_cell)[], na.rm=TRUE)
+ sum_fished_area_km2_bob/sum_fishable_area_km2_bob  # proportion of surface area fished in this region for the time period examined
 
  library(readr)
  output <- rbind(
@@ -296,36 +300,42 @@ aggregate_from_raster_overlay <- function (a_sce="OWF",
   #plot(mpas_vect_terra[idx], add=TRUE, col=2)
   #=> TODO: Check with ArcGIS is everything in order
   mpas_rmv_lns <- mpas_vect_terra[idx]
-
+  #writeVector(mpas_rmv_lns, filename=file.path(getwd(), "INPUT_SPATIAL_LAYERS","CLOSURES_PARTNERS","EU__plus_UK_future_restrictions_lns.shp"), filetype="ESRI Shapefile")
+  
   idx                                 <- which(a_df["rmv_lns_S0"]==1 & a_df$reason_lns %in% c("current", "current_habitat","current_spp", "current_habitat_spp"))
   #plot(mpas_vect_terra)
   #plot(mpas_vect_terra[idx], add=TRUE, col=2)
   #=> TODO: Check with ArcGIS is everything in order
   mpas_rmv_lns_current <- mpas_vect_terra[idx]
-
+  #writeVector(mpas_rmv_lns_current, filename=file.path(getwd(), "INPUT_SPATIAL_LAYERS","CLOSURES_PARTNERS","EU__plus_UK_future_restrictions_lns_current.shp"), filetype="ESRI Shapefile")
+  
   idx                                 <- which(a_df["rmv_nts_S0"]==1)
   #plot(mpas_vect_terra)
   #plot(mpas_vect_terra[idx], add=TRUE, col=2)
   #=> TODO: Check with ArcGIS is everything in order
   mpas_rmv_nts <- mpas_vect_terra[idx]
-
+  #writeVector(mpas_rmv_nts, filename=file.path(getwd(), "INPUT_SPATIAL_LAYERS","CLOSURES_PARTNERS","EU__plus_UK_future_restrictions_nts.shp"), filetype="ESRI Shapefile")
+ 
   idx                                 <- which(a_df["rmv_nts_S0"]==1 & a_df$reason_nts %in% c("current", "current_habitat","current_spp", "current_habitat_spp"))
   #plot(mpas_vect_terra)
   #plot(mpas_vect_terra[idx], add=TRUE, col=2)
   #=> TODO: Check with ArcGIS is everything in order
   mpas_rmv_nts_current <- mpas_vect_terra[idx]
-
+  #writeVector(mpas_rmv_nts_current, filename=file.path(getwd(), "INPUT_SPATIAL_LAYERS","CLOSURES_PARTNERS","EU__plus_UK_future_restrictions_nts_current.shp"), filetype="ESRI Shapefile")
+ 
   idx                                 <- which(a_df["rmv_bt__S0"]==1)
   #plot(mpas_vect_terra)
   #plot(mpas_vect_terra[idx], add=TRUE, col=2)
   #=> TODO: Check with ArcGIS is everything in order
   mpas_rmv_bt <- mpas_vect_terra[idx]
+  #writeVector(mpas_rmv_bt, filename=file.path(getwd(), "INPUT_SPATIAL_LAYERS","CLOSURES_PARTNERS","EU__plus_UK_future_restrictions_bt.shp"), filetype="ESRI Shapefile")
 
   idx                                 <- which(a_df["rmv_bt__S0"]==1 & a_df$reason_bt %in% c("current", "current_habitat","current_spp", "current_habitat_spp"))
   #plot(mpas_vect_terra)
   #plot(mpas_vect_terra[idx], add=TRUE, col=2)
   #=> TODO: Check with ArcGIS is everything in order
   mpas_rmv_bt_current <- mpas_vect_terra[idx]
+  #writeVector(mpas_rmv_bt_current, filename=file.path(getwd(), "INPUT_SPATIAL_LAYERS","CLOSURES_PARTNERS","EU__plus_UK_future_restrictions_bt_current.shp"), filetype="ESRI Shapefile")
 
 #  * *current* = current restrictions in place
 #* *current_habitat* = current restrictions in place plus hypothetical habitat restriction
@@ -336,7 +346,7 @@ aggregate_from_raster_overlay <- function (a_sce="OWF",
 #* *Notrescurrent_habitat* = No current restrictions in place but hypothetical directive species restriction
 
 
-
+     
 ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
 ##!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
 ##!!!!!!!!!!!!!!!!!OWF!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!#
@@ -469,6 +479,7 @@ aggregate_from_raster_overlay <- function (a_sce="OWF",
    #plot(aer_layers_eea_terra$effort)
    plot(trim(mpas_rmv_bt_rast_terra), col=rgb(0.2,0.2,0.2,0.3))
    #plot(mpas_3035_msfd_vect_terra, col=rgb(0.2,0.2,0.2,0.3), add=TRUE)
+   writeRaster(mpas_rmv_bt_rast_terra, filename=file.path(getwd(), "INPUT_SPATIAL_LAYERS","CLOSURES_PARTNERS","EU__plus_UK_future_restrictions_bt_rast_terra.tif"))
 
     # NATURA2000+CDDA partners RESTRICT TO BOTTOM TRAWLERS-------------
    # rasterize the closed areas
@@ -484,7 +495,7 @@ aggregate_from_raster_overlay <- function (a_sce="OWF",
    #plot(aer_layers_eea_terra$effort)
    plot(trim(mpas_rmv_bt_current_rast_terra), col=rgb(0.2,0.2,0.2,0.3))
    #plot(mpas_3035_msfd_vect_terra, col=rgb(0.2,0.2,0.2,0.3), add=TRUE)
-
+  
 
    # OWF------------------
    # rasterize the closed areas
@@ -533,6 +544,9 @@ aggregate_from_raster_overlay <- function (a_sce="OWF",
    # visual check
    #plot(aer_layers_eea_terra$effort)
    plot(mpas_msfd_rast_terra, col=rgb(0.2,0.2,0.2,0.3), add=FALSE)
+   writeRaster(mpas_msfd_rast_terra, filename=file.path(getwd(), "INPUT_SPATIAL_LAYERS","CLOSURES_PARTNERS","EU__plus_UK_future_restrictions_rast_terra.tif"))
+
+
 
    # CURRENTCDDA+NATURA2000+OWF ------------------
    mpas_owf_msfd_current_rast_terra        <- sum(owf_msfd_rast_terra, owf_miss_msfd_rast_terra, mpas_rmv_lns_current_rast_terra, mpas_rmv_nts_current_rast_terra, mpas_rmv_bt_current_rast_terra, na.rm=TRUE)
