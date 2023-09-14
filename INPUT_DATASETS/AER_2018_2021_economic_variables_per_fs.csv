@@ -1,0 +1,109 @@
+upload_date;country_name;country_code;year;supra_reg;fishing_tech;vessel_length;geo_indicator;gear;fishery;activity;cluster_name;fs_name;variable_group;variable_name;variable_code;value;unit;fromtable;framework;template_name
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Number of vessels;totves;33;number;map_fs;map;map_capacity
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Number of vessels;totves;30;number;map_fs;map;map_capacity
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Number of vessels;totves;33;number;map_fs;map;map_capacity
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Total vessel power;totkw;5016.11;kW;map_fs;map;map_capacity
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Total vessel power;totkw;4.443.891;kW;map_fs;map;map_capacity
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Total vessel power;totkw;4.717.497;kW;map_fs;map;map_capacity
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Total vessel tonnage;totgt;1535.4;GT;map_fs;map;map_capacity
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Total vessel tonnage;totgt;1418.7;GT;map_fs;map;map_capacity
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Total vessel tonnage;totgt;1564.4;GT;map_fs;map;map_capacity
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Mean LOA of vessels;avgloa;160.691;metre;map_fs;map;map_capacity
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Mean LOA of vessels;avgloa;16.21;metre;map_fs;map;map_capacity
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Mean LOA of vessels;avgloa;159.282;metre;map_fs;map;map_capacity
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Mean age of vessels;avgage;228.788;year;map_fs;map;map_capacity
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Mean age of vessels;avgage;233.333;year;map_fs;map;map_capacity
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capacity;Mean age of vessels;avgage;248.182;year;map_fs;map;map_capacity
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Fishing days;totfishdays;1920;day;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Fishing days;totfishdays;2321;day;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Fishing days;totfishdays;2197;day;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Days at sea;totseadays;1941;day;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Days at sea;totseadays;2322;day;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Days at sea;totseadays;2220;day;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;kW fishing days;totkwfishdays;3.074.338.515;kWday;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;kW fishing days;totkwfishdays;349.865.582;kWday;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;kW fishing days;totkwfishdays;3.346.032.215;kWday;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;GT fishing days;totgtfishdays;99353;GTday;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;GT fishing days;totgtfishdays;108734;GTday;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;GT fishing days;totgtfishdays;104283;GTday;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Maximum days at sea;maxseadays;;day;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Maximum days at sea;maxseadays;;day;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Maximum days at sea;maxseadays;;day;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Number of fishing trips;tottrips;1904;number;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Number of fishing trips;tottrips;2315;number;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Number of fishing trips;tottrips;2155;number;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Energy consumption;totenercons;1.148.877.261;litre;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Energy consumption;totenercons;8.468.529.089;litre;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;Energy consumption;totenercons;1277721.47;litre;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Total assets;assets;28361199.47;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Total assets;assets;33137576.49;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Total assets;assets;28732925.03;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Gross debt;debts;19835946.81;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Gross debt;debts;16494744.73;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Gross debt;debts;22700291.84;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Investments;totinvest;3.234.262.604;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Investments;totinvest;2.217.461.495;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Investments;totinvest;6.891.972.692;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Value of physical capital;totdeprep;23780506.65;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Value of physical capital;totdeprep;21159381.22;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Value of physical capital;totdeprep;20165184.76;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Value of quota and other fishing rights;totrights;8.173.157.141;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Value of quota and other fishing rights;totrights;9.674.494.147;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Value of quota and other fishing rights;totrights;7.209.326.364;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Consumption of fixed capital;totdepcost;1.485.803.486;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Consumption of fixed capital;totdepcost;1290586.22;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Consumption of fixed capital;totdepcost;1.545.331.476;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Other variable costs;totvarcost;6.666.587.263;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Other variable costs;totvarcost;1.137.765.648;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Other variable costs;totvarcost;9.160.333.057;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Other non-variable costs;totnovarcost;1.089.095.546;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Other non-variable costs;totnovarcost;1460664.34;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Other non-variable costs;totnovarcost;1.279.438.947;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Lease/rental payments for quota;totrightscost;1.216.706.546;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Lease/rental payments for quota;totrightscost;3.931.858.178;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Lease/rental payments for quota;totrightscost;3.433.409.909;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Repair & maintenance costs;totrepcost;2.000.414.751;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Repair & maintenance costs;totrepcost;1.651.258.181;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Repair & maintenance costs;totrepcost;1.893.944.046;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Energy costs;totenercost;4.324.756.808;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Energy costs;totenercost;4.670.511.591;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Energy costs;totenercost;6.498.545.304;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Personnel costs;totcrewwage;1.665.677.036;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Personnel costs;totcrewwage;3.401.631.945;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Personnel costs;totcrewwage;2.366.475.566;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Value of unpaid labour;totunpaidlab;835.424.959;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Value of unpaid labour;totunpaidlab;5.025.800.694;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Expenditure;Value of unpaid labour;totunpaidlab;9.276.917.007;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Subsidies on investments;subinvest;0;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Subsidies on investments;subinvest;0;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Capital;Subsidies on investments;subinvest;0;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Operating subsidies;totdirsub;0;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Operating subsidies;totdirsub;0;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Operating subsidies;totdirsub;0;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Gross value of landings;totlandginc;6.235.614.518;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Gross value of landings;totlandginc;13298490.55;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Gross value of landings;totlandginc;10666681.46;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Income from leasing out quota;totrightsinc;0;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Income from leasing out quota;totrightsinc;0;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Income from leasing out quota;totrightsinc;0;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Other income;tototherinc;360.494.059;euro;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Other income;tototherinc;2.603.060.559;euro;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Income;Other income;tototherinc;1.186.203.748;euro;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;Engaged crew;totjob;50;number;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;Engaged crew;totjob;58;number;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;Engaged crew;totjob;533.488;number;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;Total hours worked per year (engaged crew);hrworked;53232;hour;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;Total hours worked per year (engaged crew);hrworked;51160;hour;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;Total hours worked per year (engaged crew);hrworked;629.938.017;hour;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;Unpaid labour;unpaidemp;170.155;number;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;Unpaid labour;unpaidemp;93.122;number;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;Unpaid labour;unpaidemp;23.527;number;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;FTE national;totnatfte;296.108;number;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;FTE national;totnatfte;302.535;number;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Employment;FTE national;totnatfte;326.398;number;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;kW days at sea;kwseadays;315.263.249;kWday;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;kW days at sea;kwseadays;350.183.318;kWday;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;kW days at sea;kwseadays;3.421.038.505;kWday;map_fs;map;map_fs
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;GT days at sea;gtseadays;104167;GTday;map_fs;map;map_fs
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;GT days at sea;gtseadays;108660;GTday;map_fs;map;map_fs
+27-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Effort;GT days at sea;gtseadays;108669;GTday;map_fs;map;map_fs

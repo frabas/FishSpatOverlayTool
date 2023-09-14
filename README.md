@@ -26,7 +26,7 @@ The study investigated two ways for a hypothetical redistribution of the fishing
 After the redistribution occurs, the catches that were historically recorded inside the closed areas are cancelled, and new catches outside the closed areas are computed, accounting for the extra effort added to the c-squares and their specific LPUEs. The economic variables, including the GVA, are also recomputed based on the new catches and spatialised costs.
 
 >[!WARNING]
-> The study provides a workflow for a STATIC evaluation and could not replace a more elaborated dynamic approach. Bioeconomic models are best suited to evaluate the effect of spatial displacement of fishing efforts. See for example [GitHub Pages](https://github.com/frabas/DISPLACE_GUI)  
+> The study provides a workflow for a STATIC evaluation and could not replace a more elaborated dynamic approach. Bioeconomic models are best suited to evaluate the effect of spatial displacement of fishing efforts. See for example the [DISPLACE software](https://github.com/frabas/DISPLACE_GUI)  
 
 
 

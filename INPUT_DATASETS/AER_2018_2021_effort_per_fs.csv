@@ -1,0 +1,37 @@
+upload_date;country_code;year;supra_reg;fishing_tech;vessel_length;geo_indicator;gear;fishery;activity;cluster_name;fs_name;sub_reg;variable_code;value;fromtable;framework;template_name;level;sub_level;variable_group;variable_name;unit
+26-02-2021;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totfishdays;2321;map_fssub;map;map_fssub;FS;SUB;Effort;Fishing days;day
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.c.22;totfishdays;1;map_fssub;map;map_fssub;FS;SUB;Effort;Fishing days;day
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totfishdays;1916;map_fssub;map;map_fssub;FS;SUB;Effort;Fishing days;day
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.a;totfishdays;3;map_fssub;map;map_fssub;FS;SUB;Effort;Fishing days;day
+26-02-2021;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totseadays;2322;map_fssub;map;map_fssub;FS;SUB;Effort;Days at sea;day
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.c.22;totseadays;1;map_fssub;map;map_fssub;FS;SUB;Effort;Days at sea;day
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totseadays;1937;map_fssub;map;map_fssub;FS;SUB;Effort;Days at sea;day
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.a;totseadays;3;map_fssub;map;map_fssub;FS;SUB;Effort;Days at sea;day
+29-03-2023;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totfishdays;2197;map_fssub;map;map_fssub;FS;SUB;Effort;Fishing days;day
+29-03-2023;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totseadays;2220;map_fssub;map;map_fssub;FS;SUB;Effort;Days at sea;day
+22-06-2020;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totfishdays;1967;map_fssub;map;map_fssub;FS;SUB;Effort;Fishing days;day
+22-06-2020;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totseadays;1976;map_fssub;map;map_fssub;FS;SUB;Effort;Days at sea;day
+26-02-2021;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totgtfishdays;108734;map_fssub;map;map_fssub;FS;SUB;Effort;GT fishing days;GTday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.c.22;totgtfishdays;75;map_fssub;map;map_fssub;FS;SUB;Effort;GT fishing days;GTday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totgtfishdays;99253;map_fssub;map;map_fssub;FS;SUB;Effort;GT fishing days;GTday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.a;totgtfishdays;25;map_fssub;map;map_fssub;FS;SUB;Effort;GT fishing days;GTday
+29-03-2023;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totgtfishdays;104283;map_fssub;map;map_fssub;FS;SUB;Effort;GT fishing days;GTday
+26-02-2021;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totkwfishdays;349.865.582;map_fssub;map;map_fssub;FS;SUB;Effort;kW fishing days;kWday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.c.22;totkwfishdays;125.035;map_fssub;map;map_fssub;FS;SUB;Effort;kW fishing days;kWday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totkwfishdays;3.069.660.735;map_fssub;map;map_fssub;FS;SUB;Effort;kW fishing days;kWday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.a;totkwfishdays;342.743;map_fssub;map;map_fssub;FS;SUB;Effort;kW fishing days;kWday
+22-06-2020;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totgtfishdays;85876.1;map_fssub;map;map_fssub;FS;SUB;Effort;GT fishing days;GTday
+29-03-2023;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totkwfishdays;3.346.032.215;map_fssub;map;map_fssub;FS;SUB;Effort;kW fishing days;kWday
+26-02-2021;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;gtseadays;108660;map_fssub;map;map_fssub;FS;SUB;Effort;GT days at sea;GTday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.c.22;gtseadays;75;map_fssub;map;map_fssub;FS;SUB;Effort;GT days at sea;GTday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;gtseadays;104067;map_fssub;map;map_fssub;FS;SUB;Effort;GT days at sea;GTday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.a;gtseadays;25;map_fssub;map;map_fssub;FS;SUB;Effort;GT days at sea;GTday
+22-06-2020;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;totkwfishdays;304.073.352;map_fssub;map;map_fssub;FS;SUB;Effort;kW fishing days;kWday
+29-03-2023;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;gtseadays;108669;map_fssub;map;map_fssub;FS;SUB;Effort;GT days at sea;GTday
+22-06-2020;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;gtseadays;87683.6;map_fssub;map;map_fssub;FS;SUB;Effort;GT days at sea;GTday
+26-02-2021;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;kwseadays;350.183.318;map_fssub;map;map_fssub;FS;SUB;Effort;kW days at sea;kWday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.c.22;kwseadays;125.035;map_fssub;map;map_fssub;FS;SUB;Effort;kW days at sea;kWday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;kwseadays;314.795.471;map_fssub;map;map_fssub;FS;SUB;Effort;kW days at sea;kWday
+22-03-2022;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.3.a;kwseadays;342.743;map_fssub;map;map_fssub;FS;SUB;Effort;kW days at sea;kWday
+29-03-2023;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;kwseadays;3.421.038.505;map_fssub;map;map_fssub;FS;SUB;Effort;kW days at sea;kWday
+22-06-2020;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;27.4.b;kwseadays;304.073.352;map_fssub;map;map_fssub;FS;SUB;Effort;kW days at sea;kWday

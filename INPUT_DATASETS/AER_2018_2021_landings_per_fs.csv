@@ -1,0 +1,97 @@
+upload_date;country_name;country_code;year;supra_reg;fishing_tech;vessel_length;geo_indicator;gear;fishery;activity;cluster_name;fs_name;variable_group;variable_name;variable_code;value;unit;species_name;species_code;sub_reg;fromtable;framework;template_name
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;445.239.148;euro;European lobster;LBE;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;2.331.571;euro;European eel;ELE;27.3.a;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;2039;kg;European lobster;LBE;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;41;kg;European eel;ELE;27.3.a;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;1.717.023.947;euro;Common edible cockle;COC;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;1.123.678;euro;Marine crabs nei;CRA;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;22.540.654;euro;European eel;ELE;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;114.604.465;euro;Atlantic herring;HER;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;384.957.079;euro;European lobster;LBE;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;6.582.762.701;euro;Blue mussel;MUS;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;9.987.858.906;euro;European flat oyster;OYF;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;33.876.724;euro;Pacific cupped oyster;OYG;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;7.678.581;euro;European sprat;SPR;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;862.443.004;euro;Red starfish;STH;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;1.255.282.966;euro;Solid surf clam;ULO;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;2583920;kg;Common edible cockle;COC;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;58.8;kg;Marine crabs nei;CRA;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;420;kg;European eel;ELE;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;31808;kg;Atlantic herring;HER;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;1816.9;kg;European lobster;LBE;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;37567726.02;kg;Blue mussel;MUS;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;166225;kg;European flat oyster;OYF;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;10568;kg;Pacific cupped oyster;OYG;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;7630;kg;European sprat;SPR;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;986700;kg;Red starfish;STH;27.4.b;map_fsfao;map;map_fsfao
+12-06-2020;Denmark;DNK;2018;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;671110;kg;Solid surf clam;ULO;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;6.577.625.534;euro;Common edible cockle;COC;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;233.053;euro;Marine crabs nei;CRA;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;3.308.287;euro;Edible crab;CRE;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;53.361.193;euro;European eel;ELE;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;7.248.764;euro;Marine fishes nei;MZZ;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;16.574.919;euro;Pacific cupped oyster;OYG;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;925.291.652;euro;Red starfish;STH;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;2.235.831.291;euro;Solid surf clam;ULO;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;793.793.279;euro;European flat oyster;OYF;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;5.558.362.331;euro;Blue mussel;MUS;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;0.8068;euro;European anchovy;ANE;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;4.485.379.185;euro;Common edible cockle;COC;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;11.645.825;euro;Edible crab;CRE;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;16.458.249;euro;European eel;ELE;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;343.660.078;euro;Atlantic herring;HER;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;779.959.661;euro;European lobster;LBE;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;5.346.992.739;euro;Blue mussel;MUS;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;3.231.925.508;euro;European flat oyster;OYF;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;287.575.635;euro;Pacific cupped oyster;OYG;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;0.8068;euro;Sticklebacks;SKB;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;146.157.053;euro;European sprat;SPR;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;1.669.806.374;euro;Red starfish;STH;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;1.855.889.472;euro;Solid surf clam;ULO;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;9891560;kg;Common edible cockle;COC;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;58;kg;Marine crabs nei;CRA;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;313;kg;Edible crab;CRE;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;507;kg;European eel;ELE;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;2460;kg;Marine fishes nei;MZZ;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;8186;kg;Pacific cupped oyster;OYG;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;896452;kg;Red starfish;STH;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;1255803;kg;Solid surf clam;ULO;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;144246;kg;European flat oyster;OYF;27.4.b;map_fsfao;map;map_fsfao
+26-02-2021;Denmark;DNK;2019;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;36351693;kg;Blue mussel;MUS;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;4;kg;European anchovy;ANE;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;9666158;kg;Common edible cockle;COC;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;205;kg;Edible crab;CRE;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;306;kg;European eel;ELE;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;109731;kg;Atlantic herring;HER;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;2905;kg;European lobster;LBE;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;24627007;kg;Blue mussel;MUS;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;55459;kg;European flat oyster;OYF;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;14618;kg;Pacific cupped oyster;OYG;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;4;kg;Sticklebacks;SKB;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;67936;kg;European sprat;SPR;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;1223150;kg;Red starfish;STH;27.4.b;map_fsfao;map;map_fsfao
+29-03-2023;Denmark;DNK;2021;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;1408760;kg;Solid surf clam;ULO;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;93.311.153;euro;Sandeels(=Sandlances) nei;SAN;27.3.a;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;1.499.826;euro;European sprat;SPR;27.3.a;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;41.685.224;euro;Blue mussel;MUS;27.3.c.22;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;1.382.688.149;euro;Common edible cockle;COC;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;43.948.378;euro;European eel;ELE;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;380.331.893;euro;European lobster;LBE;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;4.059.371.495;euro;Blue mussel;MUS;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;4.235.555.794;euro;European flat oyster;OYF;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;15.599.259;euro;Pacific cupped oyster;OYG;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;78177.94;euro;Red starfish;STH;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;2.333.982.185;euro;Solid surf clam;ULO;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Value of landings;totvallandg;5.519.036;euro;Edible crab;CRE;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;38642;kg;Sandeels(=Sandlances) nei;SAN;27.3.a;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;621;kg;European sprat;SPR;27.3.a;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;43520;kg;Blue mussel;MUS;27.3.c.22;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;2674735;kg;Common edible cockle;COC;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;493;kg;European eel;ELE;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;1844;kg;European lobster;LBE;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;22129484;kg;Blue mussel;MUS;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;93038;kg;European flat oyster;OYF;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;2076;kg;Pacific cupped oyster;OYG;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;579151;kg;Red starfish;STH;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;1818290;kg;Solid surf clam;ULO;27.4.b;map_fsfao;map;map_fsfao
+22-03-2022;Denmark;DNK;2020;NAO;DRB;VL1218;NGI;;;;;DNK NAO DRB1218 NGI;Landings;Live weight of landings;totwghtlandg;124;kg;Edible crab;CRE;27.4.b;map_fsfao;map;map_fsfao
