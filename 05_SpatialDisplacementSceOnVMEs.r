@@ -642,6 +642,7 @@ if(a_reg!="ALL_REGIONS"){
 
     # a cherry on top of the cake: search for required extra effort to break even if GVA <0
     extra_effort <- 1
+    extra_varcosts <- 1
     if(!is.na(a_logratio_b) & a_logratio_b<0)
     {
      cat(paste0("Brute search for ", fs, "...\n"))
@@ -653,8 +654,8 @@ if(a_reg!="ALL_REGIONS"){
                       (data_layers_on_area_open_this_fs$value_aer_in_ctry_level6_csquare / data_layers_on_area_open_this_fs$landings_aer_in_ctry_level6_csquare) +
                       data_layers_on_area_open_this_fs$other_income_in_csquare -
                       data_layers_on_area_open_this_fs$unpaid_labour_in_csquare - (extra_effort*data_layers_on_area_open_this_fs$varcosts_in_ctry_level6_csquare)
-            extra_varcosts <- (extra_effort*data_layers_on_area_open_this_fs$varcosts_in_ctry_level6_csquare)-data_layers_on_area_open_this_fs$varcosts_in_ctry_level6_csquare # proxy of most likely extra fuel use needed        
-      a_sum <- sum(dd[], na.rm=TRUE)
+    extra_varcosts <- sum((extra_effort*data_layers_on_area_open_this_fs$varcosts_in_ctry_level6_csquare)[], na.rm=TRUE)- sum(data_layers_on_area_open_this_fs$varcosts_in_ctry_level6_csquare[], na.rm=TRUE) # proxy of most likely extra fuel use needed           
+          a_sum <- sum(dd[], na.rm=TRUE)
          this_logratio <- log(a_sum/GAV_base)
            # a_logratio_b for GVA
          GAV_after   <- a_sum
